@@ -15,6 +15,8 @@ namespace ET
         public StartSceneConfig LocationConfig;
         
         public List<StartSceneConfig> Robots = new List<StartSceneConfig>();
+
+        public List<StartSceneConfig> Realms = new List<StartSceneConfig>();
         
         public List<StartSceneConfig> GetByProcess(int process)
         {
@@ -48,6 +50,9 @@ namespace ET
                         break;
                     case SceneType.Robot:
                         this.Robots.Add(startSceneConfig);
+                        break;
+                    case SceneType.Realm:
+                        this.Realms.Add(startSceneConfig);
                         break;
                 }
             }
