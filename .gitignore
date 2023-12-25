@@ -22,6 +22,7 @@ obj/
 _ReSharper.CSharp/
 *.opensdf
 *.sdf
+*.unitypackage
 /CSharp/CSharp.sln.ide
 /Unity/Library
 /Unity/CSharp60Support/compilation log.txt
