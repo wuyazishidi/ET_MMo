@@ -37,5 +37,9 @@ namespace ET
 		 public const ushort ServerListInfo = 10034;
 		 public const ushort C2R_GetServerList = 10035;
 		 public const ushort R2C_GetServerList = 10036;
+		 public const ushort C2R_LoginZone = 10037;
+		 public const ushort R2C_LoginZone = 10038;
+		 public const ushort C2G_Login2Gate = 10039;
+		 public const ushort G2C_Login2Gate = 10040;
 	}
 }

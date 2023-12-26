@@ -49,7 +49,7 @@ namespace ET
                 {
                     if (accountDB == null)
                     {
-                        response.Error = ErrorCode.ERR_Login_AccountNotExit;
+                        response.Error = ErrorCode.ERR_Login_AccountNotExist;
                         reply();
                         return;
                     }

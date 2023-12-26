@@ -570,4 +570,66 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(R2C_LoginZone))]
+	[Message(OuterOpcode.C2R_LoginZone)]
+	[ProtoContract]
+	public partial class C2R_LoginZone: Object, IRequest
+	{
+		[ProtoMember(90)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(1)]
+		public int Zone { get; set; }
+
+	}
+
+	[Message(OuterOpcode.R2C_LoginZone)]
+	[ProtoContract]
+	public partial class R2C_LoginZone: Object, IResponse
+	{
+		[ProtoMember(90)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(91)]
+		public int Error { get; set; }
+
+		[ProtoMember(92)]
+		public string Message { get; set; }
+
+		[ProtoMember(1)]
+		public string GateAddress { get; set; }
+
+		[ProtoMember(2)]
+		public long GateKey { get; set; }
+
+	}
+
+	[ResponseType(nameof(G2C_Login2Gate))]
+	[Message(OuterOpcode.C2G_Login2Gate)]
+	[ProtoContract]
+	public partial class C2G_Login2Gate: Object, IRequest
+	{
+		[ProtoMember(90)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(1)]
+		public long GateKey { get; set; }
+
+	}
+
+	[Message(OuterOpcode.G2C_Login2Gate)]
+	[ProtoContract]
+	public partial class G2C_Login2Gate: Object, IResponse
+	{
+		[ProtoMember(90)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(91)]
+		public int Error { get; set; }
+
+		[ProtoMember(92)]
+		public string Message { get; set; }
+
+	}
+
 }

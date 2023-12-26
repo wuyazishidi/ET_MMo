@@ -1,6 +1,6 @@
 namespace ET
 {
-    public static partial class ErrorCode
+    public static partial class  ErrorCode
     {
         public const int ERR_Success = 0;
 
@@ -18,12 +18,16 @@ namespace ET
         
         public const int ERR_Login_AccountError = 200003;
         
-        public const int ERR_Login_AccountNotExit = 200004;
+        public const int ERR_Login_AccountNotExist = 200004;
         
         public const int ERR_Login_PasswordError = 200005;
         
         public const int ERR_Login_RepeatLogin = 200006;
         
         public const int ERR_Login_AccountNotLogin = 200007;
+        
+        public const int ERR_Login_ZoneNotExist = 200008;
+        
+        public const int ERR_Login_NoLoginGateInfo = 200009;
     }
 }

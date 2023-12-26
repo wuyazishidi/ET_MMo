@@ -13,6 +13,8 @@ namespace ET
         public const int LoadUIBaseWindows = 8;
         
         public const int AccountLogin = 9;
+        public const int LoginZone = 10;
+        public const int GateUserLock = 11;
 
         public const int Max = 100; // 这个必须最大
     }

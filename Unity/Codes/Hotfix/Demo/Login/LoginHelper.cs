@@ -57,6 +57,36 @@ namespace ET
             
             return ErrorCode.ERR_Success;
         }
+
+        public static async ETTask<int> LoginZone(Scene zoneScene, int zone)
+        {
+            R2C_LoginZone r2CLoginZone=(R2C_LoginZone)await zoneScene.GetComponent<SessionComponent>().Session.Call(new C2R_LoginZone(){Zone = zone});
+            if (r2CLoginZone.Error != ErrorCode.ERR_Success)
+            {
+                Log.Error($"登录测试 R2C_LoginZone Error{r2CLoginZone.Error}");
+                return r2CLoginZone.Error;
+            }
+            Log.Debug($"登录测试 Gate:{r2CLoginZone.GateAddress}key:{r2CLoginZone.GateKey}");
+            zoneScene.GetComponent<SessionComponent>().Session?.Dispose();
+
+            Session gateSession = zoneScene.GetComponent<NetKcpComponent>().Create(NetworkHelper.ToIPEndPoint(r2CLoginZone.GateAddress));
+            PingComponent pingComponent = gateSession.GetComponent<PingComponent>();
+            if (pingComponent == null)
+            {
+                gateSession.AddComponent<PingComponent>();
+            }
+
+            zoneScene.GetComponent<SessionComponent>().Session = gateSession;
+
+            G2C_Login2Gate g2CLogin2Gate = (G2C_Login2Gate)await gateSession.Call(new C2G_Login2Gate() { GateKey = r2CLoginZone.GateKey });
+            if (g2CLogin2Gate.Error != ErrorCode.ERR_Success)
+            {
+                Log.Error($"登录测试 G2C_Login2Gate Error{g2CLogin2Gate.Error}");
+                return g2CLogin2Gate.Error;
+            }
+            Log.Debug("登录Gate网关服务器成功!");
+            return ErrorCode.ERR_Success;
+        }
     }
     
    

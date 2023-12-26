@@ -325,4 +325,47 @@ namespace ET
 
 	}
 
+	[Message(InnerOpcode.LoginGateInfo)]
+	[ProtoContract]
+	public partial class LoginGateInfo: Object
+	{
+		[ProtoMember(1)]
+		public string Account { get; set; }
+
+		[ProtoMember(2)]
+		public int LoginZone { get; set; }
+
+	}
+
+	[ResponseType(nameof(G2R_GetGateKey))]
+	[Message(InnerOpcode.R2G_GetGateKey)]
+	[ProtoContract]
+	public partial class R2G_GetGateKey: Object, IActorRequest
+	{
+		[ProtoMember(90)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(1)]
+		public LoginGateInfo Info { get; set; }
+
+	}
+
+	[Message(InnerOpcode.G2R_GetGateKey)]
+	[ProtoContract]
+	public partial class G2R_GetGateKey: Object, IActorResponse
+	{
+		[ProtoMember(90)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(91)]
+		public int Error { get; set; }
+
+		[ProtoMember(92)]
+		public string Message { get; set; }
+
+		[ProtoMember(1)]
+		public long GateKey { get; set; }
+
+	}
+
 }

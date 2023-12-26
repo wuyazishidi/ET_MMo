@@ -23,5 +23,8 @@ namespace ET
 		 public const ushort G2R_GetLoginKey = 20020;
 		 public const ushort M2M_UnitTransferResponse = 20021;
 		 public const ushort G2M_SessionDisconnect = 20022;
+		 public const ushort LoginGateInfo = 20023;
+		 public const ushort R2G_GetGateKey = 20024;
+		 public const ushort G2R_GetGateKey = 20025;
 	}
 }

@@ -154,3 +154,27 @@ message G2M_SessionDisconnect // IActorLocationMessage
 {
 	int32 RpcId = 90;
 }
+
+message LoginGateInfo
+{
+    string Account = 1;
+	int32 LoginZone = 2;
+}
+
+//ResponseType G2R_GetGateKey
+message R2G_GetGateKey // IActorRequest
+{
+    int32 RpcId = 90;
+	LoginGateInfo Info = 1;
+
+}
+
+message G2R_GetGateKey // IActorResponse
+{
+   int32 RpcId = 90;
+   int32 Error = 91;
+   string Message = 92;
+
+   int64 GateKey = 1;
+
+}
