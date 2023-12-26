@@ -15,6 +15,15 @@ namespace ET
         // 200001以上不抛异常
 
         public const int ERR_RealmAddressError = 200002;
+        
         public const int ERR_Login_AccountError = 200003;
+        
+        public const int ERR_Login_AccountNotExit = 200004;
+        
+        public const int ERR_Login_PasswordError = 200005;
+        
+        public const int ERR_Login_RepeatLogin = 200006;
+        
+        public const int ERR_Login_AccountNotLogin = 200007;
     }
 }

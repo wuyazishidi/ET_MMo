@@ -1,4 +1,4 @@
 
-mongodb://127.0.0.1ET1
-mongodb://127.0.0.1ET2
-dmongodb://127.0.0.1ET100
+%Zone1"mongodb://127.0.0.1*ET1
+%Zone2"mongodb://127.0.0.1*ET2
+)dZone100"mongodb://127.0.0.1*ET100
