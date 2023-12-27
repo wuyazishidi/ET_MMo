@@ -632,4 +632,87 @@ namespace ET
 
 	}
 
+	[Message(OuterOpcode.A2C_Disconnect)]
+	[ProtoContract]
+	public partial class A2C_Disconnect: Object, IMessage
+	{
+		[ProtoMember(1)]
+		public int Error { get; set; }
+
+	}
+
+	[Message(OuterOpcode.GeteRoleInfo)]
+	[ProtoContract]
+	public partial class GeteRoleInfo: Object
+	{
+		[ProtoMember(1)]
+		public long UnitId { get; set; }
+
+		[ProtoMember(2)]
+		public string Name { get; set; }
+
+		[ProtoMember(3)]
+		public int Level { get; set; }
+
+	}
+
+	[ResponseType(nameof(G2C_GetRoles))]
+	[Message(OuterOpcode.C2G_GetRoles)]
+	[ProtoContract]
+	public partial class C2G_GetRoles: Object, IRequest
+	{
+		[ProtoMember(90)]
+		public int RpcId { get; set; }
+
+	}
+
+	[Message(OuterOpcode.G2C_GetRoles)]
+	[ProtoContract]
+	public partial class G2C_GetRoles: Object, IResponse
+	{
+		[ProtoMember(90)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(91)]
+		public int Error { get; set; }
+
+		[ProtoMember(92)]
+		public string Message { get; set; }
+
+		[ProtoMember(1)]
+		public List<GeteRoleInfo> Roles = new List<GeteRoleInfo>();
+
+	}
+
+	[ResponseType(nameof(G2C_CreateRole))]
+	[Message(OuterOpcode.C2G_CreateRole)]
+	[ProtoContract]
+	public partial class C2G_CreateRole: Object, IRequest
+	{
+		[ProtoMember(90)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(1)]
+		public string Name { get; set; }
+
+	}
+
+	[Message(OuterOpcode.G2C_CreateRole)]
+	[ProtoContract]
+	public partial class G2C_CreateRole: Object, IResponse
+	{
+		[ProtoMember(90)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(91)]
+		public int Error { get; set; }
+
+		[ProtoMember(92)]
+		public string Message { get; set; }
+
+		[ProtoMember(1)]
+		public GeteRoleInfo Role { get; set; }
+
+	}
+
 }

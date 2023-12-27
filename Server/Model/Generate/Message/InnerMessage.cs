@@ -368,4 +368,35 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(Name2G_CheckName))]
+	[Message(InnerOpcode.G2Name_CheckName)]
+	[ProtoContract]
+	public partial class G2Name_CheckName: Object, IActorRequest
+	{
+		[ProtoMember(90)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(1)]
+		public string Name { get; set; }
+
+		[ProtoMember(2)]
+		public long UintId { get; set; }
+
+	}
+
+	[Message(InnerOpcode.Name2G_CheckName)]
+	[ProtoContract]
+	public partial class Name2G_CheckName: Object, IActorResponse
+	{
+		[ProtoMember(90)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(91)]
+		public int Error { get; set; }
+
+		[ProtoMember(92)]
+		public string Message { get; set; }
+
+	}
+
 }

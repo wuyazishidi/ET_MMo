@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.SymbolStore;
 
 namespace ET
 {
@@ -13,6 +14,17 @@ namespace ET
             if (gateUser != null)
             {
                 //TODO 执行下线顶号操作
+                long instanceId = gateUser.InstanceId;
+                using (await gateUser.GetGateUserLock())
+                {
+                    if (instanceId != gateUser.InstanceId)
+                    {
+                        reply();
+                        return;
+                    }
+
+                    gateUser.OfflineSession();
+                }
             }
 
             GateSessionKeyComponent gateSessionKeyComponent = scene.GetComponent<GateSessionKeyComponent>();

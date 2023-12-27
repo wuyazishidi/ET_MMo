@@ -26,5 +26,7 @@ namespace ET
 		 public const ushort LoginGateInfo = 20023;
 		 public const ushort R2G_GetGateKey = 20024;
 		 public const ushort G2R_GetGateKey = 20025;
+		 public const ushort G2Name_CheckName = 20026;
+		 public const ushort Name2G_CheckName = 20027;
 	}
 }

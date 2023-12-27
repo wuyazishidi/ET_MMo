@@ -10,6 +10,8 @@
 		Location = 5,
 		Map = 6,
 		RealmInfo=7,
+		
+		Name = 8,//名字查重复
 
 		// 客户端Model层
 		Client = 30,
@@ -17,5 +19,7 @@
 		Login = 32,
 		Robot = 33,
 		Current = 34,
+		
+		Max 
 	}
 }

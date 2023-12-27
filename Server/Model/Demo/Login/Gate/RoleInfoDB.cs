@@ -6,13 +6,15 @@
     {
         public string Account;
         
-        public int AccountZoneId;
+        public long AccountZoneId;
         
         
         public bool IsDeleted;
 
         public string Name;
         
-        public int level;
+        public int Level;
+
+        public int LogicZone;//逻辑区服
     }
 }

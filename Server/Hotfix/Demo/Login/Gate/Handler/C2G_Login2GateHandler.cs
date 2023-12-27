@@ -62,10 +62,18 @@ namespace ET
                 }
                 else
                 {
+                    gateUser.RemoveComponent<GateUserDisconnectComponent>();
+                    gateUser.RemoveComponent<MultiLoginComponent>();
                     
                 }
                 //连接到新的Session
                 gateUser.SessionInstanceId = session.InstanceId;
+                session.AddComponent<SessionUserComponent,long>(gateUser.InstanceId);
+
+                if (gateUser.State != GateUserState.InGate)
+                {
+                    gateUser.AddComponent<MultiLoginComponent>();
+                }
                 reply();
             }
 

@@ -41,5 +41,11 @@ namespace ET
 		 public const ushort R2C_LoginZone = 10038;
 		 public const ushort C2G_Login2Gate = 10039;
 		 public const ushort G2C_Login2Gate = 10040;
+		 public const ushort A2C_Disconnect = 10041;
+		 public const ushort GeteRoleInfo = 10042;
+		 public const ushort C2G_GetRoles = 10043;
+		 public const ushort G2C_GetRoles = 10044;
+		 public const ushort C2G_CreateRole = 10045;
+		 public const ushort G2C_CreateRole = 10046;
 	}
 }

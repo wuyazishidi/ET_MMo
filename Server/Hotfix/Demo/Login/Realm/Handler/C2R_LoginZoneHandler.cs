@@ -24,7 +24,7 @@ namespace ET
             }
 
             string account = realmAccountComponent.Info.Account;
-            using (await CoroutineLockComponent.Instance.Wait(CoroutineLockType.LoginZone, account.GetHashCode()))
+            using (await CoroutineLockComponent.Instance.Wait(CoroutineLockType.LoginZone, account.GetLongHashCode()))
             {
                 StartSceneConfig startZoneConfig = LoginHelper.GetGateConfig(request.Zone, account);
 

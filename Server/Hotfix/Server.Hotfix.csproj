@@ -19,6 +19,9 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="..\..\Unity\Codes\Hotfix\Demo\Helper\StringHashHelper.cs">
+      <Link>Demo\Helper\StringHashHelper.cs</Link>
+    </Compile>
     <Compile Include="..\..\Unity\Codes\Hotfix\Demo\Move\MoveComponentSystem.cs">
       <Link>Demo\Move\MoveComponentSystem.cs</Link>
     </Compile>

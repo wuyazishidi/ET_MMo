@@ -10,7 +10,7 @@ namespace ET
         protected override async ETTask Run(Session session, C2R_AccountLogin request, R2C_AccountLogin response, Action reply)
         {
             session.RemoveComponent<SessionAcceptTimeoutComponent>();
-            int modCount =Math.Abs(request.Account.GetHashCode())%StartSceneConfigCategory.Instance.Realms.Count;
+            int modCount = (int)(((uint)request.Account.GetLongHashCode())%(uint)StartSceneConfigCategory.Instance.Realms.Count);
             if (session.DomainScene().InstanceId != StartSceneConfigCategory.Instance.Realms[modCount].InstanceId)
             {
                 response.Error = ErrorCode.ERR_RealmAddressError;
@@ -35,7 +35,7 @@ namespace ET
             }
 
             string account = request.Account;
-            using (await CoroutineLockComponent.Instance.Wait(CoroutineLockType.AccountLogin,account.GetHashCode()))
+            using (await CoroutineLockComponent.Instance.Wait(CoroutineLockType.AccountLogin,account.GetLongHashCode()))
             {
                 AccountDB accountDB = null;
                 // DBManagerComponent.Instance.GetZoneDB();//每次调用都要传入zoneID,所以不便

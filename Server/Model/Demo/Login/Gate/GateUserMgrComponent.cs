@@ -7,7 +7,8 @@ namespace ET
     public class GateUserMgrComponent:Entity,IAwake,IDestroy
     {
         public Dictionary<string, GateUser> Users = new Dictionary<string, GateUser>();
+       
     }
-    
-  
+   
+
 }

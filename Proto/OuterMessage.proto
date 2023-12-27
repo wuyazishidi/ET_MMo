@@ -309,3 +309,45 @@ message G2C_Login2Gate // IResponse
 	int32 Error = 91;
 	string Message = 92;
 }
+
+message A2C_Disconnect // IMessage
+{
+	int32 Error = 1;
+}
+
+message GeteRoleInfo
+{
+     int64 UnitId = 1;
+	 string Name = 2;
+	 int32 Level = 3;
+}
+
+//ResponseType G2C_GetRoles
+message C2G_GetRoles // IRequest
+{
+	int32 RpcId = 90;
+}
+
+message G2C_GetRoles // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	repeated GeteRoleInfo Roles = 1;
+}
+
+//ResponseType G2C_CreateRole
+message C2G_CreateRole // IRequest
+{
+	int32 RpcId = 90;
+	string Name = 1;
+}
+
+message G2C_CreateRole // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+
+	GeteRoleInfo Role = 1;
+}

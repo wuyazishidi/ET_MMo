@@ -1,4 +1,6 @@
-﻿namespace ET
+﻿using NLog;
+
+namespace ET
 {
     public class GateUserMgrComponentDestroySystem: DestroySystem<GateUserMgrComponent>
     {
@@ -41,5 +43,18 @@
             self.Users.Add(accountZoneDB.Account,gateUser);
             return gateUser;
         }
+        
+        public static void Remove(this GateUserMgrComponent self, string account)
+        {
+            GateUser gateUser = self.Get(account);
+            if (gateUser == null)
+            {
+                return;
+            }
+
+            self.Users.Remove(account);
+            gateUser.Dispose();
+        }
+
     }
 }

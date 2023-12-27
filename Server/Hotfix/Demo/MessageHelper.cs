@@ -52,7 +52,14 @@ namespace ET
         {
             return await ActorMessageSenderComponent.Instance.Call(actorId, message);
         }
+
+        public static async ETTask<IActorResponse> CallActor(int zone, SceneType sceneType, IActorRequest message)
+        {
+            long actorId = StartSceneConfigCategory.Instance.GetSceneInstanceId(zone, sceneType);
+            return await CallActor(actorId, message);
+        }
         
+
         /// <summary>
         /// 发送RPC协议给ActorLocation
         /// </summary>
