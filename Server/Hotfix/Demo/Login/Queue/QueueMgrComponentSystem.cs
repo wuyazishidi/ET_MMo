@@ -52,6 +52,7 @@ namespace ET
     }
 
     [FriendClass(typeof(QueueMgrComponent))]
+    [FriendClass(typeof(QueueInfo))]
     public static class QueueMgrComponentSystem
     {
         /// <summary>

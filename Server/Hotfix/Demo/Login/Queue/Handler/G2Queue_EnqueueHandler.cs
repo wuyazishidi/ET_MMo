@@ -2,6 +2,7 @@
 
 namespace ET
 {
+    [FriendClass(typeof(QueueMgrComponent))]
     public class G2Queue_EnqueueHandler:AMActorRpcHandler<Scene ,G2Queue_Enqueue,Queue2G_Equeue>
     {
         protected override async ETTask Run(Scene scene, G2Queue_Enqueue request, Queue2G_Equeue response, Action reply)
