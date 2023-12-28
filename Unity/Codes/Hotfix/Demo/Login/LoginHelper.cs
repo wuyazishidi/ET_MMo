@@ -3,8 +3,8 @@ using CommandLine;
 
 namespace ET
 {
+    [FriendClass(typeof(RoleInfosComponent))]
     public static class LoginHelper
-
     {
         public static async ETTask<int> Login(Scene zoneScene, string address, string account, string password)
         {
@@ -119,7 +119,60 @@ namespace ET
             }
 
             zoneScene.GetComponent<RoleInfosComponent>().AddRoleInfo(g2CCreateRole.Role);
-            
+
+            return ErrorCode.ERR_Success;
+        }
+
+        public static async ETTask<int> DeleteRole(Scene zoneScene, long roleId)
+        {
+            G2C_DeleteRole g2CDeleteRole =
+                    (G2C_DeleteRole)await zoneScene.GetComponent<SessionComponent>().Session.Call(new C2G_DeleteRole() { RoleId = roleId });
+            if (g2CDeleteRole.Error != ErrorCode.ERR_Success)
+            {
+                Log.Error($"登录测试 G2C_DeleteRole Error{g2CDeleteRole.Error}");
+                return g2CDeleteRole.Error;
+            }
+
+            zoneScene.GetComponent<RoleInfosComponent>().DeleteRoleInfoById(g2CDeleteRole.RoleId);
+
+            return ErrorCode.ERR_Success;
+        }
+
+        public static async ETTask<int> EnterMap(Scene zoneScene)
+        {
+            if (!zoneScene.GetComponent<RoleInfosComponent>().IsCurrentRoleExist())
+            {
+                return ErrorCode.ERR_Login_RoleNotExist;
+            }
+
+            G2C_Enter2Map g2CEnter2Map = (G2C_Enter2Map)await zoneScene.GetComponent<SessionComponent>().Session
+                    .Call(new C2G_Enter2Map() { UnitId = zoneScene.GetComponent<RoleInfosComponent>().CurrentUnitId });
+            if (g2CEnter2Map.Error == ErrorCode.ERR_Success)
+            {
+                Log.Error($"登录测试 G2C_Enter2Map Error{g2CEnter2Map.Error}");
+                return g2CEnter2Map.Error;
+            }
+
+            zoneScene.GetComponent<PlayerComponent>().MyId = zoneScene.GetComponent<RoleInfosComponent>().CurrentUnitId;
+            if (g2CEnter2Map.InQueue)
+            {
+                Game.EventSystem.Publish(new EventType.UpdateQueueInfo(){ZoneScene = zoneScene,Count = g2CEnter2Map.Count,Index = g2CEnter2Map.Index});
+                return ErrorCode.ERR_Success;
+            }
+            //场景切换完成
+            await zoneScene.GetComponent<ObjectWait>().Wait<WaitType.Wait_SceneChangeFinish>();
+            Game.EventSystem.Publish(new EventType.EnterMapFinish(){ZoneScene = zoneScene});
+            return ErrorCode.ERR_Success;
+        }
+
+        public static async ETTask<int> CancelQueue(Scene zoneScene)
+        {
+            G2C_CancelQueue g2CCancelQueue= (G2C_CancelQueue)await zoneScene.GetComponent<SessionComponent>().Session.Call(new C2G_CancelQueue(){UnitId = zoneScene.GetComponent<RoleInfosComponent>().CurrentUnitId});
+            if (g2CCancelQueue.Error != ErrorCode.ERR_Success)
+            {
+                Log.Error($"取消排队 g2CCancelQueue Error{g2CCancelQueue.Error}");
+                return g2CCancelQueue.Error;
+            }
             return ErrorCode.ERR_Success;
         }
     }

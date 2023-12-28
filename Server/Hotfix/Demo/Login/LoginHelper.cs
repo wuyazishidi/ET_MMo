@@ -52,6 +52,7 @@ namespace ET
             if (accountZoneDB != null)
             {
                 //TODO通知排队服务器进行角色下线 通知Map场景服务器角色进行下线
+                MessageHelper.SendActor(self.DomainZone(),SceneType.Queue,new G2Queue_DisConnect(){UnitId = accountZoneDB.LastRoleId});
             }
 
             if (dispose)
@@ -61,6 +62,7 @@ namespace ET
             else
             {
                 self.State = GateUserState.InGate;
+                self.RemoveComponent<GateQueueComponent>();
             }
 
             await ETTask.CompletedTask;
@@ -107,6 +109,11 @@ namespace ET
             int modCount = (int)(((uint)account.GetLongHashCode()) % (uint)StartSceneConfigCategory.Instance.Gates[zone].Count);
             StartSceneConfig gateConfig = StartSceneConfigCategory.Instance.Gates[zone][modCount];
             return gateConfig;
+        }
+
+        public static async ETTask EnterMap(this GateUser self)
+        {
+            await ETTask.CompletedTask;
         }
     }
 }

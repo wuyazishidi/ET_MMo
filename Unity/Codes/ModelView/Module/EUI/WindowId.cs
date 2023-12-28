@@ -13,5 +13,6 @@ namespace ET
 		WindowID_ServerInfo,//游戏区服选择界面
 		WindowID_CharacterSelect,//游戏角色选择界面
 		WindowID_CreateCharacter,//创建游戏角色界面
+		WindowID_Queue,
 	}
 }

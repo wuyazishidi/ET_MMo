@@ -8,6 +8,7 @@
         
         public int LoginZoneId;
 
-     
+        public long LastRoleId;
+
     }
 }

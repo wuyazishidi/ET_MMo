@@ -351,3 +351,58 @@ message G2C_CreateRole // IResponse
 
 	GeteRoleInfo Role = 1;
 }
+
+//ResponseType G2C_DeleteRole
+message C2G_DeleteRole // IRequest
+{
+	int32 RpcId = 90;
+	int64 RoleId = 1;
+}
+
+message G2C_DeleteRole // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+
+	int64 RoleId = 1;
+}
+
+//ResponseType G2C_Enter2Map
+message C2G_Enter2Map // IRequest
+{
+	int32 RpcId = 90;
+	int64 UnitId = 1;
+}
+
+message G2C_Enter2Map // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+
+	bool InQueue = 1;//是否需要排队
+	int32 Count = 2;//排队总人数
+	int32 Index = 3;//排到第几位
+}
+
+message G2C_UpdateQueue // IMessage
+{
+	int32 Index = 1;
+	int32 Count = 2;
+}
+
+
+//ResponseType G2C_CancelQueue
+message C2G_CancelQueue // IRequest
+{
+	int32 RpcId = 90;
+	int64 UnitId = 1;
+}
+
+message G2C_CancelQueue // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
