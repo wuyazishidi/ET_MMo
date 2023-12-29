@@ -11,9 +11,7 @@ namespace ET
             zoneScene.AddComponent<RedDotComponent>();
             zoneScene.AddComponent<ResourcesLoaderComponent>();
         
-            //zoneScene.GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_Login);
-            zoneScene.GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_TapToStart);
-            zoneScene.GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_AccountLogin);
+          
             
             
         }

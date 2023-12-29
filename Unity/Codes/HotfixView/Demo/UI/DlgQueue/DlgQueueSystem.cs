@@ -34,7 +34,7 @@ namespace ET
 				{
 					return;
 				}
-				self.ZoneScene().GetComponent<UIComponent>().HideWindow(WindowID.WindowID_Queue);
+				self.DomainScene().GetComponent<UIComponent>().HideWindow(WindowID.WindowID_Queue);
 			}
 			catch (Exception e)
 			{

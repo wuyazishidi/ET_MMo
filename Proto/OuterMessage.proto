@@ -72,6 +72,7 @@ message UnitInfo
 	repeated int32 Ks = 10;
 	repeated int64 Vs = 11;
 	MoveInfo MoveInfo = 12;
+	string Name = 13;
 }
 
 message M2C_CreateUnits // IActorMessage

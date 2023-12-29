@@ -53,7 +53,7 @@ namespace ET
                     return;
                 }
 
-                self.ZoneScene().GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_ServerInfo);
+                self.DomainScene().GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_ServerInfo);
 
 
             }

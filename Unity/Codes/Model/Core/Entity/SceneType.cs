@@ -13,7 +13,7 @@
 		
 		Name = 8,//名字查重复
 		
-		Queue = 9,
+		Queue = 9,//排队服
 
 		// 客户端Model层
 		Client = 30,

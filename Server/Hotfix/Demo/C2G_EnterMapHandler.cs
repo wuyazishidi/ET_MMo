@@ -12,7 +12,7 @@ namespace ET
 			Player player = session.GetComponent<SessionPlayerComponent>().GetMyPlayer();
 
 			// 在Gate上动态创建一个Map Scene，把Unit从DB中加载放进来，然后传送到真正的Map中，这样登陆跟传送的逻辑就完全一样了
-			GateMapComponent gateMapComponent = player.AddComponent<GateMapComponent>();
+			GateMapComponent gateMapComponent = null;//player.AddComponent<GateMapComponent>();
 			gateMapComponent.Scene = await SceneFactory.Create(gateMapComponent, "GateMap", SceneType.Map);
 
 			Scene scene = gateMapComponent.Scene;

@@ -161,6 +161,9 @@ namespace ET
 		[ProtoMember(12)]
 		public MoveInfo MoveInfo { get; set; }
 
+		[ProtoMember(13)]
+		public string Name { get; set; }
+
 	}
 
 	[Message(OuterOpcode.M2C_CreateUnits)]

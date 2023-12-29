@@ -2,8 +2,12 @@
 
 namespace ET
 {
-    [FriendClass(typeof (AccountZoneDB))]
-    [FriendClass(typeof (GateUser))]
+    [FriendClass(typeof(AccountZoneDB))]
+    [FriendClass(typeof(GateUser))]
+    [FriendClassAttribute(typeof(ET.GateMapComponent))]
+    [FriendClassAttribute(typeof(ET.SessionPlayerComponent))]
+    [FriendClassAttribute(typeof(ET.UnitGateComponent))]
+    [FriendClassAttribute(typeof(ET.RoleInfoDB))]
     public static class LoginHelper
     {
         public static async ETTask<CoroutineLock> GetGateUserLock(string account)
@@ -52,7 +56,7 @@ namespace ET
             if (accountZoneDB != null)
             {
                 //TODO通知排队服务器进行角色下线 通知Map场景服务器角色进行下线
-                MessageHelper.SendActor(self.DomainZone(),SceneType.Queue,new G2Queue_DisConnect(){UnitId = accountZoneDB.LastRoleId});
+                MessageHelper.SendActor(self.DomainZone(), SceneType.Queue, new G2Queue_DisConnect() { UnitId = accountZoneDB.LastRoleId });
             }
 
             if (dispose)
@@ -111,8 +115,40 @@ namespace ET
             return gateConfig;
         }
 
+
+        //传送进入游戏
         public static async ETTask EnterMap(this GateUser self)
         {
+            AccountZoneDB accountZoneDB = self.GetComponent<AccountZoneDB>();
+            Log.Console($"->测试 账号{accountZoneDB.Account}进入游戏");
+
+            StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetBySceneName(self.DomainZone(), "Map1");
+            self.RemoveComponent<GateQueueComponent>();
+
+            if (self.State == GateUserState.InMap)
+            {
+                M2C_StartSceneChange m2CStartSceneChange =
+                        new M2C_StartSceneChange() { SceneInstanceId = startSceneConfig.InstanceId, SceneName = startSceneConfig.Name };
+                self.Session.Send(m2CStartSceneChange);
+                self.Session.AddComponent<SessionPlayerComponent>().PlayerId = accountZoneDB.LastRoleId;
+                MessageHelper.CallLocationActor(accountZoneDB.LastRoleId, new G2M_SecondLogin() { }).Coroutine();
+                return;
+            }
+
+            self.State = GateUserState.InMap;
+
+            GateMapComponent gateMapComponent = self.AddComponent<GateMapComponent>();
+
+            gateMapComponent.Scene = await SceneFactory.Create(gateMapComponent, "GateMap", SceneType.Map);
+
+            Unit unit = UnitFactory.Create(gateMapComponent.Scene, accountZoneDB.LastRoleId, UnitType.Player);
+
+
+            unit.AddComponent<UnitGateComponent, long>(self.InstanceId).Name = accountZoneDB.CurRole.Name;
+            self.Session.AddComponent<SessionPlayerComponent>().PlayerId = accountZoneDB.LastRoleId;
+
+            await TransferHelper.Transfer(unit, startSceneConfig.InstanceId, startSceneConfig.Name);
+
             await ETTask.CompletedTask;
         }
     }

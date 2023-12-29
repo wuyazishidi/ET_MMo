@@ -34,5 +34,7 @@ namespace ET
 		 public const ushort G2Queue_EnterMap = 20031;
 		 public const ushort Queue2G_UpdateInfo = 20032;
 		 public const ushort G2Queue_DisConnect = 20033;
+		 public const ushort G2M_SecondLogin = 20034;
+		 public const ushort M2G_SecondLogin = 20035;
 	}
 }

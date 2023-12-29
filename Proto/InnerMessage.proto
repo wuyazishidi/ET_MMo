@@ -248,3 +248,18 @@ message G2Queue_DisConnect // IActorMessage
 	int64 UnitId = 1;
 	bool Protect = 2;
 }
+
+
+//ResponseType M2G_SecondLogin
+message G2M_SecondLogin // IActorLocationRequest
+{
+	int32 RpcId = 90;
+}
+
+
+message M2G_SecondLogin // IActorLocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}

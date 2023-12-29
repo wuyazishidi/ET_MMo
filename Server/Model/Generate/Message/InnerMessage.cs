@@ -509,4 +509,29 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(M2G_SecondLogin))]
+	[Message(InnerOpcode.G2M_SecondLogin)]
+	[ProtoContract]
+	public partial class G2M_SecondLogin: Object, IActorLocationRequest
+	{
+		[ProtoMember(90)]
+		public int RpcId { get; set; }
+
+	}
+
+	[Message(InnerOpcode.M2G_SecondLogin)]
+	[ProtoContract]
+	public partial class M2G_SecondLogin: Object, IActorLocationResponse
+	{
+		[ProtoMember(90)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(91)]
+		public int Error { get; set; }
+
+		[ProtoMember(92)]
+		public string Message { get; set; }
+
+	}
+
 }

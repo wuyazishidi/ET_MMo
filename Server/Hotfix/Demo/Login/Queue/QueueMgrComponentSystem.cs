@@ -9,7 +9,7 @@ namespace ET
         public override void Awake(QueueMgrComponent self)
         {
             self.Timer_Trick = TimerComponent.Instance.NewRepeatedTimer(ConstValue.Queue_TickTime, TimerType.QueueTickTime, self);
-            self.Timer_ClearProtect = TimerComponent.Instance.NewRepeatedTimer(ConstValue.Queue_ProtectTime, TimerType.QueueClearProtect, self);
+            self.Timer_ClearProtect = TimerComponent.Instance.NewRepeatedTimer(ConstValue.Queue_ClearProtect, TimerType.QueueClearProtect, self);
             self.Timer_Update = TimerComponent.Instance.NewRepeatedTimer(ConstValue.Queue_TickUpdate, TimerType.QueueUpdateTime, self);
         }
     }

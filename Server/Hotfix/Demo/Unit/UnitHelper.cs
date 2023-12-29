@@ -6,6 +6,7 @@ namespace ET
     [FriendClass(typeof(Unit))]
     [FriendClass(typeof(MoveComponent))]
     [FriendClass(typeof(NumericComponent))]
+    [FriendClassAttribute(typeof(ET.UnitGateComponent))]
     public static class UnitHelper
     {
         public static UnitInfo CreateUnitInfo(Unit unit)
@@ -23,6 +24,7 @@ namespace ET
             unitInfo.ForwardX = forward.x;
             unitInfo.ForwardY = forward.y;
             unitInfo.ForwardZ = forward.z;
+            unitInfo.Name = unit.GetComponent<UnitGateComponent>().Name;
 
             MoveComponent moveComponent = unit.GetComponent<MoveComponent>();
             if (moveComponent != null)
@@ -48,20 +50,20 @@ namespace ET
 
             return unitInfo;
         }
-        
+
         // 获取看见unit的玩家，主要用于广播
         public static Dictionary<long, AOIEntity> GetBeSeePlayers(this Unit self)
         {
             return self.GetComponent<AOIEntity>().GetBeSeePlayers();
         }
-        
+
         public static void NoticeUnitAdd(Unit unit, Unit sendUnit)
         {
             M2C_CreateUnits createUnits = new M2C_CreateUnits();
             createUnits.Units.Add(CreateUnitInfo(sendUnit));
             MessageHelper.SendToClient(unit, createUnits);
         }
-        
+
         public static void NoticeUnitRemove(Unit unit, Unit sendUnit)
         {
             M2C_RemoveUnits removeUnits = new M2C_RemoveUnits();
